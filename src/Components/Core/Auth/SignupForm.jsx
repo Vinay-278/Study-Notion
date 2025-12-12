@@ -106,9 +106,169 @@ const SignupForm = () => {
 
   return (
     <div>
-      
+      {/* Tab */}
+      <form onSubmit={handleOnSubmit} className="flex w-full flex-col gap-y-4">
+        <div className="flex gap-x-4">
+          <label style={{ position: "relative" }}>
+            <p className="mb-1 text-[0.875rem] leading-[1.375rem] text-white">
+              First Name <sup className="text-pink-300">*</sup>
+            </p>
+            <FaUser
+              style={{
+                color: "grey",
+                position: "absolute",
+                top: "calc(49%)",
+                left: "2.85%",
+                fontSize: "20px",
+              }}
+            />
+            <input
+              type="text"
+              required
+              name="firstName"
+              value={firstname}
+              onChange={handleOnchange}
+              placeholder="Enter first name"
+              style={{
+                boxShadow: "inset 0px -1px 0px rgba(255, 255, 255, 0.18)",
+                paddingLeft: "35px",
+              }}
+              className="w-full rounded-[0.5rem] bg-[] p-[12px] text-white"
+            />
+          </label>
+          <label style={{ position: "relative" }}>
+            <p className="mb-1 text-[0.875rem] leading-[1.375rem] text-white">
+              Last Name <sup className="text-pink-300">*</sup>
+            </p>
+            <FaUser
+              style={{
+                color: "grey",
+                position: "absolute",
+                top: "calc(49%)",
+                left: "2.85%",
+                fontSize: "20px",
+              }}
+            />
+            <input
+              required
+              type="text"
+              name="lastname"
+              onChange={handleOnchange}
+              placeholder="Enter the last name"
+              style={{
+                boxShadow: "inset 0px -1px 0px rgba(255, 255, 255, 0.18)",
+                paddingLeft: "35px",
+              }}
+              className="w-full rounded-[0.5rem] bg-[] p-[] text-white"
+            />
+          </label>
+        </div>
+        <label className="w-full" style={{ position: "relative" }}>
+          <p className="mb-1 text-[0.875rem] leading-[1.375rem] text-white">
+            Email Address <sup className="text-pink-300">*</sup>
+          </p>
+          <SiGmail
+            style={{
+              color: "grey",
+              position: "absolute",
+              top: "calc(53%)",
+              left: "1.85%",
+              fontSize: "20px",
+            }}
+          />
+          <input
+            required
+            type="text"
+            name="email"
+            value={email}
+            onChange={handleOnchange}
+            placeholder="Enter email address"
+            style={{
+              boxShadow: "inset 0px -1px 0px rgba(255, 255, 255, 0.18)",
+              paddingLeft: "35px",
+            }}
+            className="w-full rounded-[0.5rem] bg-[] p-[12px] text-white"
+          />
+        </label>
+        <div className="flex gap-x-4">
+          <label className="relative" style={{ position: "relative" }}>
+            <p className="mb-1 text-[0.875rem] leading-[1.375rem] text-white">
+              Create Password <sup className="text-pink-300">*</sup>
+            </p>
+            <FaLock
+              style={{
+                color: "grey",
+                position: "absolute",
+                top: "calc(52%)",
+                left: "4.85%",
+                fontSize: "20px",
+              }}
+            />
+            <input
+              required
+              type="text"
+              name="password"
+              value={password}
+              onChange={handleOnchange}
+              placeholder="Enter Password"
+              style={{
+                boxShadow: "inset 0px -1px 0px rgba(255, 255, 255, 0.18)",
+                paddingLeft: "35px",
+              }}
+              className="w-full rounded-[0.5rem] bg-[] p-[12px] pr-10 text-white"
+            />
+            <span
+              onClick={() => setShowPassword((prev) => !prev)}
+              className="absolute right-3 top-[38px] z-[10px] cursor-pointer"
+            >
+              {showPassword ? (
+                <AiOutlineEyeInvisible fontSize={24} fill="#AFB2BF" />
+              ) : (
+                <AiOutlineEye fontSize={24} fill="#AFB2BF" />
+              )}
+            </span>
+          </label>
+          <label className="relative" style={{ position: "relative" }}>
+            <p className="mb-1 text-[0.875rem] leading-[1.375rem] text-white">
+              Confirm Password <sup className="text-pink-300">*</sup>
+            </p>
+            <FaLock
+              style={{
+                color: "grey",
+                position: "absolute",
+                top: "calc(52%)",
+                left: "4.85%",
+                fontSize: "20px",
+              }}
+            />
+            <input
+              required
+              type={showConfirmPassword ? "text" : "password"}
+              name="confirmPassword"
+              value={confirmPassword}
+              placeholder="confirm password"
+              style={{
+                boxShadow: "inset 0px -1px 0px rgba(255, 255, 255, 0.18)",
+                paddingLeft: "35px",
+              }}
+            />
+            <span onClick={()=>setShowConfirmPassword((prev)=>!prev)} className="absolute right-3 top-[38px] z-[10px] cursor-pointer">
+              {
+                showConfirmPassword?(
+                  <AiOutlineEyeInvisible fontSize={24} fill="#AFB2BF"/>
+                ):(
+                  <AiOutlineEye fontSize={24} fill="#AFB2BF"/>
+                )
+              }
+            </span>
+          </label>
+        </div>
+        <button type="submit" className="mt-6 rounded-[8px] bg-yellow-50 py-[8px] px-[12px] font-medium text-[]">
+          Create Account
+        </button>
+      </form>
     </div>
-  )
+  );
 }
 
 export default SignupForm
