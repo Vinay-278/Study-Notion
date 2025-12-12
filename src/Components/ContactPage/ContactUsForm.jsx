@@ -1,8 +1,8 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useForm } from 'react-hook-form'
-import CountryCode from '../../../data/countrycode'
+import {countrycode} from '../../../data/countrycode'
 import {apiConnector} from '../../Service/apiconnector'
-import {contactEndpoint} from "../../Service/apis"
+import {contactusEndpoint} from "../../Service/apis"
 
 const ContactUsForm = () => {
   const [loading, setLoading] = useState(false);
@@ -14,7 +14,7 @@ const ContactUsForm = () => {
       setLoading(true);
       const res = await apiConnector(
         "POST",
-        contactEndpoint.CONTACT_US_API,
+        contactusEndpoint.CONTACT_US_API,
         data
       );
       setLoading(false)
@@ -40,11 +40,11 @@ const ContactUsForm = () => {
     <form
       className="flex flex-col gap-7"
       onSubmit={handleSubmit(submitContactForm)}
-      style={{ margin: "30px" }}
+      style={{ margin: "30px", color: "white" }}
     >
       <div className="flex flex-col gap-5 lg:flex-row">
         <div className="flex flex-col gap-2 lg:w-[48%]">
-          <label htmlFor="firstname" className="lable-style">
+          <label htmlFor="firstname" className="lable-style ">
             {" "}
             First Name
           </label>
@@ -53,11 +53,11 @@ const ContactUsForm = () => {
             name="firstname"
             id="firstname"
             placeholder="Entry first name"
-            className="form-style"
+            className="form-style  bg-gray-900 text-white h-7"
+            {...register("firstname", { required: true })}
           />
-          {...register("firstname", { required: true })}
           {errors.firstname && (
-            <span className="-mt-1 text-[12px] text-yellow-100">
+            <span className="-mt-1 text-[12px] text-red-500">
               Please Enter your name
             </span>
           )}
@@ -71,9 +71,9 @@ const ContactUsForm = () => {
             name="lastname"
             id="lastname"
             placeholder="Enter last name"
-            className="form-style"
+            className="form-style  bg-gray-900 text-white h-7"
+            {...register("lastname")}
           />
-          {...register("lastname")}
         </div>
       </div>
       <div className="flex flex-col gap-2">
@@ -85,11 +85,11 @@ const ContactUsForm = () => {
           name="email"
           id="email"
           placeholder="Enter email address"
-          className="form-style"
+          className="form-style  bg-gray-900 text-white h-7"
           {...register("email", { required: true })}
         />
         {errors.email && (
-          <span className="-mt-1 text-[12px] text-yellow-100">
+          <span className="-mt-1 text-[12px] text-red-500">
             Please Enter your Email address.
           </span>
         )}
@@ -107,7 +107,7 @@ const ContactUsForm = () => {
               className="form-style"
               {...register("countrycode", { required: true })}
             >
-              {CountryCode.map((ele, i) => (
+              {countrycode.map((ele, i) => (
                 <option key={i} value={ele.code}>
                   {ele.code} -{ele.country}
                 </option>
@@ -120,11 +120,11 @@ const ContactUsForm = () => {
               name="phonenumber"
               id="phonenumber"
               placeholder="12345 67890"
-              className="form-style"
+              className="form-style  bg-gray-900 text-white h-7"
               {...register("phoneNo", {
                 required: {
                   value: true,
-                  message: "please enter your phone Number",
+                  message: "Please Enter Your Phone Number",
                 },
                 maxLength: { value: 10, message: "Invalid phone Number" },
                 minLength: { value: 10, message: "Invalid phone number" },
@@ -133,14 +133,14 @@ const ContactUsForm = () => {
           </div>
         </div>
         {errors.phoneNo && (
-          <span className="-mt-1 text-[12px] text-yellow-100 -">
+          <span className="-mt-1 text-[12px] text-red-500">
             {errors.phoneNo.message}
           </span>
         )}
       </div>
       <div className="flex flex-col gap-2">
         <label htmlFor="message" className="label-style">
-          Messahe
+          Message
         </label>
         <textarea
           name="message"
@@ -148,19 +148,19 @@ const ContactUsForm = () => {
           cols="30"
           rows="7"
           placeholder="Enter your message here"
-          className="form-style"
+          className="form-style  bg-gray-900 text-white "
           {...register("message", { required: true })}
         />
         {errors.message && (
-          <span className="-mt-1 text-[12px] text-yellow-100">
-            Please enter your Message
+          <span className="-mt-1 text-[14px] text-red-500">
+            Please Enter Your Message
           </span>
         )}
       </div>
       <button
         disabled={loading}
         type="submit"
-        className={`rounded-md bg-yellow-50 px-6 py-3 text-center text-[13px] font-bold text-black shadow-[2px_2px_0px_0px_rgba(255,255,255,0,0.18)] ${
+        className={`rounded-md bg-yellow-300 px-6 py-3 text-center text-[13px] font-bold text-black shadow-[2px_2px_0px_0px_rgba(255,255,255,0,0.18)] ${
           !loading &&
           "transition-all duration-200 hover:scale-95 hover:shadow-none"
         } disabled:bg-[#585D69] sm:text-[16px]`}
