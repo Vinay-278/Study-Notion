@@ -4,7 +4,7 @@ import { FcGoogle } from 'react-icons/fc'
 import LoginForm from './LoginForm'
 import SignupForm from './SignupForm'
 
-const Template = ({title, description1, description2, image, fromType}) => {
+const Template = ({title, description1, description2, image, formType}) => {
   const {loading} =useSelector((state)=>state.auth);
   return (
     <div className="grid place-items-center pt-10">
@@ -22,8 +22,7 @@ const Template = ({title, description1, description2, image, fromType}) => {
                 {description2}
               </span>
             </p>
-            {fromType === "signup" && <SignupForm />}
-            {fromType === "login" && <LoginForm />}
+            {formType==="login"?<LoginForm/>:<SignupForm/>}
           </div>
           <div className="relative mx-auto w-11/12 max-w-[450px] md:mx-0">
             <img

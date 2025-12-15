@@ -8,7 +8,7 @@ const Login = () => {
     description1="Build skills for today, tommorow, and beyond."
     description2="Education to future-proof your career."
     image={loginImg}
-    formTyple="login"
+    formType="login"
     />
   )
 }

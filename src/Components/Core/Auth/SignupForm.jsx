@@ -27,7 +27,7 @@ const SignupForm = () => {
   })
 
   const [showPassword, setShowPassword] = useState(false)
-  const [showConfirmPassword, setShowConfirmPassword] = useState(false)
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
 
   const {firstname, lastname, email, password, confirmPassword} = formData;
 
@@ -57,6 +57,8 @@ const SignupForm = () => {
   //Handle form submission
   const handleOnSubmit =(e) =>{
     e.preventDefault();
+    console.log(password, " ")
+    console.log(confirmPassword)
     if(password !== confirmPassword){
       toast.error("Password do not match");
       return;
@@ -110,7 +112,7 @@ const SignupForm = () => {
       <form onSubmit={handleOnSubmit} className="flex w-full flex-col gap-y-4">
         <div className="flex gap-x-4">
           <label style={{ position: "relative" }}>
-            <p className="mb-1 text-[0.875rem] leading-[1.375rem] text-white">
+            <p className="mb-1 text-[0.875rem] leading-[1.375rem] text-white font-bold">
               First Name <sup className="text-pink-300">*</sup>
             </p>
             <FaUser
@@ -126,18 +128,17 @@ const SignupForm = () => {
               type="text"
               required
               name="firstName"
-              value={firstname}
               onChange={handleOnchange}
               placeholder="Enter first name"
               style={{
                 boxShadow: "inset 0px -1px 0px rgba(255, 255, 255, 0.18)",
                 paddingLeft: "35px",
               }}
-              className="w-full rounded-[0.5rem] bg-[] p-[12px] text-white"
+              className="w-full rounded-[0.5rem] bg-[] p-[12px] text-white font-bold"
             />
           </label>
           <label style={{ position: "relative" }}>
-            <p className="mb-1 text-[0.875rem] leading-[1.375rem] text-white">
+            <p className="mb-1 text-[0.875rem] leading-[1.375rem] text-white font-bold">
               Last Name <sup className="text-pink-300">*</sup>
             </p>
             <FaUser
@@ -159,12 +160,12 @@ const SignupForm = () => {
                 boxShadow: "inset 0px -1px 0px rgba(255, 255, 255, 0.18)",
                 paddingLeft: "35px",
               }}
-              className="w-full rounded-[0.5rem] bg-[] p-[] text-white"
+              className="w-full rounded-[0.5rem] bg-[] p-[12px] text-white font-bold"
             />
           </label>
         </div>
         <label className="w-full" style={{ position: "relative" }}>
-          <p className="mb-1 text-[0.875rem] leading-[1.375rem] text-white">
+          <p className="mb-1 text-[0.875rem] text-white font-bold">
             Email Address <sup className="text-pink-300">*</sup>
           </p>
           <SiGmail
@@ -187,12 +188,12 @@ const SignupForm = () => {
               boxShadow: "inset 0px -1px 0px rgba(255, 255, 255, 0.18)",
               paddingLeft: "35px",
             }}
-            className="w-full rounded-[0.5rem] bg-[] p-[12px] text-white"
+            className="w-full rounded-[0.5rem] bg-[] p-[12px] text-white font-bold"
           />
         </label>
         <div className="flex gap-x-4">
           <label className="relative" style={{ position: "relative" }}>
-            <p className="mb-1 text-[0.875rem] leading-[1.375rem] text-white">
+            <p className="mb-1 text-[0.875rem] text-white font-bold">
               Create Password <sup className="text-pink-300">*</sup>
             </p>
             <FaLock
@@ -206,16 +207,15 @@ const SignupForm = () => {
             />
             <input
               required
-              type="text"
+              type={showPassword ? "text" : "password"}
               name="password"
-              value={password}
               onChange={handleOnchange}
               placeholder="Enter Password"
               style={{
                 boxShadow: "inset 0px -1px 0px rgba(255, 255, 255, 0.18)",
                 paddingLeft: "35px",
               }}
-              className="w-full rounded-[0.5rem] bg-[] p-[12px] pr-10 text-white"
+              className="w-full rounded-[0.5rem] bg-[] p-[12px] pr-10 text-white font-bold"
             />
             <span
               onClick={() => setShowPassword((prev) => !prev)}
@@ -229,7 +229,7 @@ const SignupForm = () => {
             </span>
           </label>
           <label className="relative" style={{ position: "relative" }}>
-            <p className="mb-1 text-[0.875rem] leading-[1.375rem] text-white">
+            <p className="mb-1 text-[0.875rem] text-white font-bold">
               Confirm Password <sup className="text-pink-300">*</sup>
             </p>
             <FaLock
@@ -245,25 +245,30 @@ const SignupForm = () => {
               required
               type={showConfirmPassword ? "text" : "password"}
               name="confirmPassword"
-              value={confirmPassword}
+              onChange={handleOnchange}
               placeholder="confirm password"
               style={{
                 boxShadow: "inset 0px -1px 0px rgba(255, 255, 255, 0.18)",
                 paddingLeft: "35px",
               }}
+              className="w-full rounded-[0.5rem] bg-[] p-[12px] text-white font-bold"
             />
-            <span onClick={()=>setShowConfirmPassword((prev)=>!prev)} className="absolute right-3 top-[38px] z-[10px] cursor-pointer">
-              {
-                showConfirmPassword?(
-                  <AiOutlineEyeInvisible fontSize={24} fill="#AFB2BF"/>
-                ):(
-                  <AiOutlineEye fontSize={24} fill="#AFB2BF"/>
-                )
-              }
+            <span
+              onClick={() => setShowConfirmPassword((prev) => !prev)}
+              className="absolute right-3 top-[38px] z-[10px] cursor-pointer"
+            >
+              {showConfirmPassword ? (
+                <AiOutlineEyeInvisible fontSize={24} fill="#AFB2BF" />
+              ) : (
+                <AiOutlineEye fontSize={24} fill="#AFB2BF" />
+              )}
             </span>
           </label>
         </div>
-        <button type="submit" className="mt-6 rounded-[8px] bg-yellow-50 py-[8px] px-[12px] font-medium text-[]">
+        <button
+          type="submit"
+          className="mt-6 rounded-[8px] bg-yellow-300 py-[8px] px-[12px] font-medium text-[]"
+        >
           Create Account
         </button>
       </form>
