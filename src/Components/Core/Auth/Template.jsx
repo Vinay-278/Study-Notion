@@ -22,7 +22,8 @@ const Template = ({title, description1, description2, image, fromType}) => {
                 {description2}
               </span>
             </p>
-            {fromType === "signup" ? <SignupForm /> : <LoginForm />}
+            {fromType === "signup" && <SignupForm />}
+            {fromType === "login" && <LoginForm />}
           </div>
           <div className="relative mx-auto w-11/12 max-w-[450px] md:mx-0">
             <img

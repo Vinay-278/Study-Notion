@@ -5,7 +5,8 @@ import Home from './Pages/Home'
 import About from './Pages/About'
 import "./index.css";
 import Contact from './Pages/Contact'
-
+import Signup from './Pages/Signup'
+import Login from './Pages/Login'
 function App() {
   
   return (
@@ -14,6 +15,8 @@ function App() {
         <Route path="/" element={<Home />}></Route>
         <Route path="/about" element={<About/>}></Route>
         <Route path='/contact' element={<Contact/>}></Route>
+        <Route path='/signup' element={<Signup/>}></Route>
+        <Route path='/login' element={<Login/>}></Route>
       </Routes>
     </div>
   );
