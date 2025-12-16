@@ -67,6 +67,7 @@ const SignupForm = () => {
         toast.error(
           "password must be at least 8 characters long and include uppercase, lowercase, number, and specials character"
         )
+        console.log(formData.firstname, formData.email, formData.lastname, formData.password)
         return;
     }
 
@@ -74,7 +75,7 @@ const SignupForm = () => {
       ...formData,
       accountType,
     }
-
+    {console.log(formData.email)}
     //setting signup data to state
     //to be used after otp verification
     dispatch(setSignupData(signupData));
@@ -109,6 +110,7 @@ const SignupForm = () => {
   return (
     <div>
       {/* Tab */}
+      <Tab tabData={tabData} field={accountType} setField={setAccountType} />
       <form onSubmit={handleOnSubmit} className="flex w-full flex-col gap-y-4">
         <div className="flex gap-x-4">
           <label style={{ position: "relative" }}>
@@ -127,7 +129,8 @@ const SignupForm = () => {
             <input
               type="text"
               required
-              name="firstName"
+              name="firstname"
+              value={firstname}
               onChange={handleOnchange}
               placeholder="Enter first name"
               style={{
@@ -154,6 +157,7 @@ const SignupForm = () => {
               required
               type="text"
               name="lastname"
+              value={lastname}
               onChange={handleOnchange}
               placeholder="Enter the last name"
               style={{
@@ -209,6 +213,7 @@ const SignupForm = () => {
               required
               type={showPassword ? "text" : "password"}
               name="password"
+              value={password}
               onChange={handleOnchange}
               placeholder="Enter Password"
               style={{
@@ -245,6 +250,7 @@ const SignupForm = () => {
               required
               type={showConfirmPassword ? "text" : "password"}
               name="confirmPassword"
+              value={confirmPassword}
               onChange={handleOnchange}
               placeholder="confirm password"
               style={{
@@ -268,6 +274,7 @@ const SignupForm = () => {
         <button
           type="submit"
           className="mt-6 rounded-[8px] bg-yellow-300 py-[8px] px-[12px] font-medium text-[]"
+          // onClick={handleOnSubmit}
         >
           Create Account
         </button>

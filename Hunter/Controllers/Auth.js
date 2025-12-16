@@ -10,7 +10,7 @@ require("dotenv").config(); //load environment variables
 const profile=require("../Models/Profile")
 
 //send otp for Email Verification
-exports.sendOTP= async(req, res)=>{
+exports.sendotp= async(req, res)=>{
     try{
         const {email}= req.body; // fetch email from req body
         const checkUserPresent= await User.findOne({email});
