@@ -6,7 +6,7 @@ const router = express.Router();
 
 //import the required constroller and middleware function
 const {
-  sendOTP,
+  sendotp,
   signUp,
   login,
   changePassword,
@@ -28,7 +28,7 @@ router.post("/login", login);
 router.post("/signup", signUp);
 
 //Route for sending OTP to the user's email
-router.post("/sendotp", sendOTP);
+router.post("/sendotp", sendotp);
 
 //Route for chnaging the password
 router.post("/changepassword", auth, changePassword);

@@ -15,9 +15,9 @@ exports.sendotp= async(req, res)=>{
         const {email}= req.body; // fetch email from req body
         const checkUserPresent= await User.findOne({email});
         //if user already exist then return a response
-        if(checkUserPresent){
+        if(!checkUserPresent){
             return res.status(400).json({
-                success:true,
+                success:false,
                 message:"User already registered",
             })
         }
