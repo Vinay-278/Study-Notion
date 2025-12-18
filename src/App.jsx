@@ -7,6 +7,7 @@ import "./index.css";
 import Contact from './Pages/Contact'
 import Signup from './Pages/Signup'
 import Login from './Pages/Login'
+import VerifyEmail from './Pages/VerifyEmail'
 function App() {
   
   return (
@@ -17,6 +18,7 @@ function App() {
         <Route path='/contact' element={<Contact/>}></Route>
         <Route path='/signup' element={<Signup/>}></Route>
         <Route path='/login' element={<Login/>}></Route>
+        <Route path='/verify-email' element={<VerifyEmail/>}></Route>
       </Routes>
     </div>
   );

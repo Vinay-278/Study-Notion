@@ -2,7 +2,7 @@ import {useState} from "react"
 import {toast} from "react-hot-toast"
 import {AiOutlineEye, AiOutlineEyeInvisible} from "react-icons/ai"
 import { useDispatch } from "react-redux"
-import { useNavigate } from "react-router"
+import { useNavigate } from "react-router-dom"
 
 import {sendOtp} from '../../../Service/operations/authAPI'
 import {setSignupData} from "../../../Slice/authSlice"
@@ -80,7 +80,7 @@ const SignupForm = () => {
     //to be used after otp verification
     dispatch(setSignupData(signupData));
     //send otp to user for verification
-    dispatch(sendOtp(formData.email, navigate));
+    dispatch(sendOtp(formData.email),navigate);
 
     //reset
     setFormData({

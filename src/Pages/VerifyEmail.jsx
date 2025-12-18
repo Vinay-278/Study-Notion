@@ -8,14 +8,17 @@ import {sendOtp,signUp} from '../Service/operations/authAPI'
 
 const VerifyEmail = () => {
     const [otp,setOtp] =useState("");
-    const {signUpData, loading} = useSelector((state)=>state.auth)
+    const {signupData, loading} = useSelector((state)=>state.auth)
     const dispatch = useDispatch();
     const navigate= useNavigate();
 
     useEffect(()=>{
         //only allow access of this route when user has filled the signup form
-        if(!signUpData){
-            navigate("/signup");
+        console.log()
+        if(!signupData){
+          console.log("data is missing")
+            navigate("/verify-email");
+            return;
         }
     },[])
 
@@ -28,7 +31,7 @@ const VerifyEmail = () => {
             email,
             password,
             confirmPassword
-        } =signUpData
+        } =signupData
         dispatch(
             signUp(
                 accountType,
@@ -87,7 +90,7 @@ const VerifyEmail = () => {
                 <BiArrowBack/> Back To Signup
             </p>
             </Link>
-            <button className='flex items-center text-blue-300 gap-x-2' onClick={()=>dispatch(sendOtp(signUpData.email))}>
+            <button className='flex items-center text-blue-300 gap-x-2' onClick={()=>dispatch(sendOtp(signupData.email))}>
                 <RxCountdownTimer/>
                 Resend it
             </button>
