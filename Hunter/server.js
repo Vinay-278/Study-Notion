@@ -1,6 +1,4 @@
 //import the express
-
-//express framework ko import kiya
 const express=require("express");
 //app banaya jo hamara server represent karega
 const app=express();
@@ -30,13 +28,13 @@ const cookieParser=require('cookie-parser');
 const cors=require('cors');
 
 //Cloudinary connection
-// Cloudinary ek service hai jisme tum images, videos ya files ko upload karte he .
+// Cloudinary ek service hai jisme hum images, videos ya files ko upload karte he .
 //Ye file basically Cloudinary ke sath authentication aur connection establish karti hai.
 const {cloudinaryConnect}=require("./Config/cloudinary");
 //File upload handle karne ke liye
 const fileUpload=require("express-fileupload");
 //.env file se envivorment variables load karne ke liye
-// Ye ek hidden file hoti hai jisme tum sensitive info rakhte ho (jise github pe push nahi karna chahiye).
+// Ye ek hidden file hoti hai jisme hum sensitive info rakhte ho (jise github pe push nahi karna chahiye).
 //Security: Password/code direct codebase me nahi hota.
 // Flexibility: Alag-alag environment (development, testing, production) ke liye alag .env use kar sakte ho.
 const dotenv=require("dotenv");
