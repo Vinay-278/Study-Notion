@@ -8,17 +8,19 @@ import Contact from './Pages/Contact'
 import Signup from './Pages/Signup'
 import Login from './Pages/Login'
 import VerifyEmail from './Pages/VerifyEmail'
+import Navbar from './Components/Common/Navbar'
 function App() {
   
   return (
     <div className="w-screen min-h-screen bg-[#000814] flex flex-col font-inter">
+      <Navbar />
       <Routes>
         <Route path="/" element={<Home />}></Route>
-        <Route path="/about" element={<About/>}></Route>
-        <Route path='/contact' element={<Contact/>}></Route>
-        <Route path='/signup' element={<Signup/>}></Route>
-        <Route path='/login' element={<Login/>}></Route>
-        <Route path='/verify-email' element={<VerifyEmail/>}></Route>
+        <Route path="/about" element={<About />}></Route>
+        <Route path="/contact" element={<Contact />}></Route>
+        <Route path="/signup" element={<Signup />}></Route>
+        <Route path="/login" element={<Login />}></Route>
+        <Route path="/verify-email" element={<VerifyEmail />}></Route>
       </Routes>
     </div>
   );

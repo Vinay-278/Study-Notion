@@ -28,7 +28,7 @@ exports.capturePayement = async (req, res) => {
 
   // check if courses exist
   if (course.length === 0) {
-    return res.json({
+    return res.status(400).json({
       success: false,
       message: "please provide Course id",
     });

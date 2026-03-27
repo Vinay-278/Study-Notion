@@ -10,11 +10,10 @@ import LearningLanguageSection from "../Components/Core/HomePage/LearningLanguag
 import TimelineSection from "../Components/Core/HomePage/TimelineSection";
 import Instructor from "../Components/Core/HomePage/Instructor";
 import Explore from "../Components/Core/HomePage/Explore";
-import Navbar from "../Components/Common/Navbar";
+//import Navbar from "../Components/Common/Navbar";
 const Home = () => {
   return (
     <div className="overflow-hidden">
-      <Navbar />
       {/* section 1 */}
       <div className="relative mx-auto flex flex-col w-11/12 items-center justify-between gap-8 text-white">
         <Link to={"/signup"}>
