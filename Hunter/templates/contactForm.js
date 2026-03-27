@@ -1,4 +1,4 @@
-exports.contactUsEmail =(email,firstname,lastname,message,phoneNo,countrycode)=>{
+exports.contactUsEmail =(email,firstname,lastname,message,phoneNo)=>{
     return `
     <!DOCTYPE html>
     <html>    

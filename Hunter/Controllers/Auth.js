@@ -15,7 +15,7 @@ exports.sendotp= async(req, res)=>{
         const {email}= req.body; // fetch email from req body
         const checkUserPresent= await User.findOne({email});
         //if user already exist then return a response
-        if(!checkUserPresent){
+        if( checkUserPresent){
             return res.status(400).json({
                 success:false,
                 message:"User already registered",
@@ -188,7 +188,8 @@ exports.login= async (req,res) =>{
           expires: new Date(Date.now() + 3 * 24 * 60 * 60 * 1000),
           httpOnly: true,
         };
-        res.cookie("token", token, options).status(200).json({
+        // cookie(name,value,options) => //name =>where is cookie is stored // value what is store in name // options me expiry date 
+        return res.cookie("token", token, options).status(200).json({
           success: true,
           token,
           user,
@@ -211,52 +212,62 @@ exports.login= async (req,res) =>{
 };
 
 //change password
-exports.changePassword= async (req,res) =>{
-    try{
-      //get data from req body
-      const {email, password, changePassword, confirmPassword}= req.body;
-      // get old passowrd, newpassword, confirmpassword
-      const user=await User.findOne({email});
-      if(!user){
-            return res.status(500).json({
-                success:false,
-                message:"User email is not valid"
-            })
-      }
-      if(await bcrypt.compare(password, user.password)){
-            if(changePassword == confirmPassword){
-                const hashedPassword=await bcrypt.hash(changePassword,10);
-                user.password=hashedPassword;
-                await user.save();
-            }
-            else{
-                return res.status(500).json({
-                    success:false,
-                    message:"ChangePassword is not match with ConfirmPassword ", 
-                })
-            }
-      }
-      else{
-            return res.status(500).json({
-                success:false,
-                message:"Password is not matched with hashed password",
-            })
-      }
-      //validation
-      //update pwd in db
-      //send email - password update
-      //return response
-      return res.status(200).json({
-            success:true,
-            message:"Successfully Password are updated"
-      })
-    }
-    catch(error){
-        console.log(error.message);
-        return res.status(500).json({
-            success:false,
-            message:"Password is not change"
-        })
+exports.changePassword = async (req, res) => {
+  try {
+    const { email, password, changePassword, confirmPassword } = req.body;
+
+    // 1. Check user exist
+    const user = await User.findOne({ email });
+    if (!user) {
+      return res.status(400).json({
+        success: false,
+        message: "User not found",
+      });
     }
 
-}
+    // 2. Check old password
+    const isMatch = await bcrypt.compare(password, user.password);
+    if (!isMatch) {
+      return res.status(401).json({
+        success: false,
+        message: "Old password is incorrect",
+      });
+    }
+
+    // 3. Check new & confirm password
+    if (changePassword !== confirmPassword) {
+      return res.status(400).json({
+        success: false,
+        message: "Passwords do not match",
+      });
+    }
+
+    // 4. Check same password
+    if (password === changePassword) {
+      return res.status(400).json({
+        success: false,
+        message: "New password must be different",
+      });
+    }
+
+    // 5. Hash new password
+    const hashedPassword = await bcrypt.hash(changePassword, 10);
+
+    // 6. Update password
+    user.password = hashedPassword;
+    await user.save();
+
+    // 7. Response
+    return res.status(200).json({
+      success: true,
+      message: "Password updated successfully",
+    });
+    
+  } catch (error) {
+    console.log(error.message);
+    return res.status(500).json({
+      success: false,
+      message: "Internal server error",
+    });
+  }
+};

@@ -2,60 +2,77 @@ const RatingAndReview = require("../Models/RatingAndReview");
 const Course =require("../Models/Course");
 
 //CreteRating
-exports.createRating= async(req,res)=>{
-    try{
-        //get userid
-        const userId=req.user.id;
-        //fetching from req body
-        const {rating, review, courseId}= req.body;
-        //check if user is enrolled or not
-        const courseDetails= await Course.findOne({
-            _id:courseId,
-            studentsEnrolled:{$elemMtch:{$eq:userId}},
-        });
-        if(!courseDetails){
-            return res.status(404).json({
-                success:false,
-                message:"Student is not enrolled in the course",
-            });
-        }
-        //check if user already reviewed the course
-        const alreadyReviewed= await RatingAndReview.findOne({
-            user:userid,
-            course:courseId,
-        });
-        if(alreadyReviewed){
-            return res.status(403).json({
-                success:false,
-                message:"Course is already reviewed by the user",
-            });
-        }
-        //update course with this rating/review
-        const updatedCourseDetails= await Course.findByIdAndUpdate({_id:courseId},
-            {
-                $push:{
-                    ratingAndReviews:ratingReview._id,
-                }
-            },
-            {new:true}
-        );
-        console.log(updatedCourseDetails);
-        //return response
-        return res.status(200).json({
-            success:true,
-            message:"Rating and Review created Successfully",
-            ratingReview,
-        }) 
-    }
-    catch(error){
-        console.log(error);
-        return res.status(500).json({
-            success:false,
-            message:error.message,
-        })
-    }  
-}
+exports.createRating = async (req, res) => {
+  try {
+    const userId = req.user.id;
+    const { rating, review, courseId } = req.body;
 
+    // check missing fields
+    if (!rating || !review || !courseId) {
+      return res.status(400).json({
+        success: false,
+        message: "All fields are required",
+      });
+    }
+
+    //  check enrollment
+    const courseDetails = await Course.findOne({
+      _id: courseId,
+      studentsEnrolled: { $elemMatch: { $eq: userId } },
+    });
+
+    if (!courseDetails) {
+      return res.status(404).json({
+        success: false,
+        message: "Student is not enrolled in the course",
+      });
+    }
+
+    //  check already reviewed
+    const alreadyReviewed = await RatingAndReview.findOne({
+      user: userId,
+      course: courseId,
+    });
+
+    if (alreadyReviewed) {
+      return res.status(403).json({
+        success: false,
+        message: "Course already reviewed",
+      });
+    }
+
+    //  create rating
+    const ratingReview = await RatingAndReview.create({
+      user: userId,
+      rating,
+      review,
+      course: courseId,
+    });
+
+    //  update course
+    await Course.findByIdAndUpdate(
+      courseId,
+      {
+        $push: {
+          ratingAndReviews: ratingReview._id,
+        },
+      },
+      { new: true },
+    );
+
+    return res.status(200).json({
+      success: true,
+      message: "Rating created successfully",
+      ratingReview,
+    });
+  } catch (error) {
+    console.log(error);
+    return res.status(500).json({
+      success: false,
+      message: error.message,
+    });
+  }
+};
 //getAverageRating
 exports.getAverageRating = async(req,res)=>{
     try{
