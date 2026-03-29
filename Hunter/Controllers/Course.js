@@ -21,13 +21,13 @@ exports.createCourse = async (req, res) => {
       !price ||
       !tag ||
       !thumbnail
-    ) {
-      console.log(whatYouWillLearn, thumbnail, tag, price);
+    ) {     
       return res.status(400).json({
         success: false,
         message: "All fields are required",
       });
     }
+    console.log(whatYouWillLearn, thumbnail, tag, price);
     //check for instructor
     const userId = req.user.id;
     const instructorDetails = await User.findById(userId);
@@ -151,7 +151,7 @@ exports.getCourseDetails = async (req, res) => {
     });
     // return response
     return res.status(200).json({
-      success: false,
+      success: true,
       data: {
         courseDetails,
         totalDurationInSeconds,
@@ -205,10 +205,11 @@ exports.getFullCourseDetails = async (req, res) => {
     let totalDurationInSeconds = 0;
     courseDetails.courseContent.forEach((content) => {
       content.subSection.forEach((SubSection) => {
-        const timeDurationInSeconds = parseInt(subSection.timeDuration);
+        const timeDurationInSeconds = parseInt(SubSection.timeDuration);
         totalDurationInSeconds += timeDurationInSeconds;
       });
     });
+    //error aah sakti he 
     const totalDuration = convertSecondsToDuration(totalDurationInSeconds);
     return res.status(200).json({
       success: true,
