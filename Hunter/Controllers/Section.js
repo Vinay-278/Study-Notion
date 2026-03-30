@@ -55,7 +55,7 @@ exports.updateSection= async (req,res)=>{
         const section= await Section.findByIdAndUpdate(sectionId,{sectionName},{new:true});
         //return res
         return res.status(200).json({
-            success:false,
+            success:true,
             message:"Section updated successfully"
         })
     }
