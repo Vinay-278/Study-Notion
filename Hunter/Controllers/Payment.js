@@ -245,6 +245,10 @@ exports.sendPayementSuccessEmail = async (req, res) => {
         payementId,
       ),
     );
+    return res.status(200).json({
+        success:true,
+        message:"payment success email sent successfully"
+    })
   } catch (error) {
     console.log("Error in sending mail", error);
     return res.status(500).json({
