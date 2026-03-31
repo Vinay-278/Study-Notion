@@ -70,7 +70,7 @@ exports.deleteAccount= async (req,res)=>{
         await User.findByIdAndDelete({_id:id});
         //return response
         return res.status(200).json({
-            success:false,
+            success:true,
             message:"User Deleted Successfully",
         })
     }
@@ -84,14 +84,27 @@ exports.deleteAccount= async (req,res)=>{
 
 exports.getAllUserDetails= async(req,res)=>{
     try {
-        //get id
+        // fetch data from it req body
         const id=req.user.id;
-        //validation and get user details
+        // validates the user id
+        if(!id){
+            return res.status(400).json({
+              success:false,
+              message:"User id is not found",
+            })
+        }
+        // get all user details through user ki id
         const userDetails= await User.findById(id).populate("additionalDetails").exec();
-        //return response
+        if(!userDetails){
+            return res.status(400).json({
+                success:false,
+                message:"user details are not found",
+            })
+        }
         return res.status(200).json({
             success:true,
             message:"User Data Fetched Successfully",
+            data:userDetails
         })
     } 
     catch (error) {
@@ -104,31 +117,31 @@ exports.getAllUserDetails= async(req,res)=>{
 
 exports.updateDisplayPicture = async (req, res) => {
   try {
-    console.log("req.files=", req.files.displayPicture);
+    // valitdate that user image send or not
     if (!req.files || !req.files.displayPicture) {
       return res.status(400).json({
         success: false,
         message: "Display picture is required",
       });
     }
-
+    // fetch the image, user id
     const displayPicture = req.files.displayPicture;
     const userId = req.user.id;
-
+    // upload image into cloudinary using env folder
     const image = await uploadImageToCloudinary(
       displayPicture,
       process.env.FOLDER_NAME,
       1000,
       1000
     );
-
+    // update profile from a user data base
     const updatedProfile = await User.findByIdAndUpdate(
       userId,
       { image: image.secure_url },
       { new: true }
     );
-
-    return res.json({
+    // return it response when it successfully
+    return res.staus(200).json({
       success: true,
       message: "Image Updated successfully",
       data: updatedProfile,

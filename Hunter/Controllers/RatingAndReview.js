@@ -88,7 +88,7 @@ exports.getAverageRating = async(req,res)=>{
             {
                 $group:{
                     _id:null,
-                    averageRating:{$avg:$rating},
+                    averageRating:{$avg:"$rating"},
                 }
             }
         ])
