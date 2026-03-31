@@ -52,7 +52,7 @@ const TimelineSection = () => {
             alt="timelineimg"
             className="shadow-white object-cover h-fit"
           />
-          <div className="absolute bg-cyan-400 flex text-white uppercase py-7 left-[15%] translate-y-[-50%] rounded-2xl">
+          <div className="absolute bg-cyan-400 flex text-white uppercase py-7 left-[15%]7 translate-y-[-50%] rounded-2xl">
             <div className="flex gap-5 items-center border-r border-cyan-300 px-5">
               <p className="text-3xl font-bold">10</p>
               <p className="text-white text-sm w-28 text-center">

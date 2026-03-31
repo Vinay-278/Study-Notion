@@ -144,7 +144,7 @@ const Home = () => {
       </div>
 
       {/* section 3 */}
-      <div className="w-11/12 mx-auto flex-col gap-8 bg-[#000814] text-white">
+      <div className="w-11/12 mx-auto flex flex-col gap-8 bg-[#000814] text-white">
         <Instructor />
         <div className="text-center text-4xl font-semibold mt-10">
           Review from Others Learners

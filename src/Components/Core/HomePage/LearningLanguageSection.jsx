@@ -11,7 +11,7 @@ const LearningLanguageSection = () => {
       <div className="flex flex-col gap-5 items-center">
         <div className="text-4xl font-semibold text-center">
           Your Swiss Knife for
-          <HighlightText text={"Learning any language"} />
+          <HighlightText text={" Learning any language"} />
         </div>
         <div className="text-center text-[#424854] mx-auto text-base w-[70%]">
           Using spin making learning multiple languages easy. with 20+ languages
