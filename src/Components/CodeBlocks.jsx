@@ -1,6 +1,5 @@
 import React from "react";
 import CTAButton from "../Components/Core/HomePage/Button";
-import HighlightText from "../Components/Core/HomePage/HighlightText";
 import { FaArrowRight } from "react-icons/fa";
 import { TypeAnimation } from "react-type-animation";
 
@@ -10,7 +9,6 @@ const CodeBlocks = ({
   subheading,
   ctabtn1,
   ctabtn2, 
-  backgroudGradient,
   codeColor,
   codeblock
 }) => {

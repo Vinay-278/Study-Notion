@@ -71,7 +71,6 @@ const Home = () => {
             }}
             codeColor={"text-[aqua]"}
             codeblock={`import React from "react";\n import CTAButton from "./Button";\nimport TypeAnimation from "react-type";\nimport { FaArrowRight } from "react-icons/fa";\n\nconst Home = () => {\nreturn (\n<div>Home</div>\n)\n}\nexport default Home;`}
-            backgroudGradient={<div className="codeblock1 absolute"></div>}
           />
           <CodeBlocks
             position={"lg:flex-row-reverse"}
