@@ -78,7 +78,7 @@ exports.capturePayement = async (req, res) => {
   const options = {
     amount: totalAmount * 100, // convert to paise
     currency,
-    receipt: Math.random(Date.now().toString()), // random receipt id
+    receipt: Math.random(Date.now()).toString(), // random receipt id
   };
 
   try {
@@ -199,7 +199,7 @@ const enrollStudents = async (courses, userid, res) => {
       );
 
       // send email
-      await mailSender(
+      const emailResponse=await mailSender(
         enrolledStudent.email,
         `Successfully Enrolled`,
         courseEnrollmentEmail(

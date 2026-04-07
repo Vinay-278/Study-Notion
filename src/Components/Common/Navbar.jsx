@@ -66,7 +66,7 @@ const Navbar = () => {
     <div className="sticky top-0 left-0 z-50 bg-black shadow-md">
       <div className="flex items-center justify-between w-full max-w-maxContent mx-auto px-4 py-3">
         {/* Logo + Mobile Menu Button */}
-        <div className="flex items-center px-25 justify-between w-full md:w-auto">
+        <div className="items-center px-25  w-full md:w-auto">
           <Link to="/" onClick={closeMobileMenu}>
             <img
               src={logo}
