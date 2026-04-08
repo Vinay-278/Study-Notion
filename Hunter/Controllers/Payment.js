@@ -199,7 +199,7 @@ const enrollStudents = async (courses, userid, res) => {
       );
 
       // send email
-      const emailResponse=await mailSender(
+      const emailResponse= await mailSender(
         enrolledStudent.email,
         `Successfully Enrolled`,
         courseEnrollmentEmail(
