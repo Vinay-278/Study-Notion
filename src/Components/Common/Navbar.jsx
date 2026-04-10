@@ -87,7 +87,11 @@ const Navbar = () => {
         </div>
 
         {/* Navigation */}
-        <nav className={`${mobileMenuOpen ? "block" : "hidden"} md:block`}>
+        <nav
+          className={`${mobileMenuOpen ? "block" : "hidden"} md:block`}
+          onMouseEnter={handleMouseEnter}
+          onMouseLeave={handleMouseLeave}
+        >
           <ul className="flex flex-col md:flex-row items-center text-center gap-6 mt-4 md:mt-0">
             {NavbarLinks.map(({ title, path }, index) => (
               <li key={index} className="text-[19px]">
@@ -99,8 +103,6 @@ const Navbar = () => {
                         ? "text-yellow-300"
                         : "text-gray-300 hover:text-yellow-500"
                     }`}
-                    onMouseEnter={handleMouseEnter}
-                    // onMouseLeave={handleMouseLeave}
                   >
                     {title}
                     <BsChevronDown

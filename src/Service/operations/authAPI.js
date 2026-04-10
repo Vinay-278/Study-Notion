@@ -51,6 +51,7 @@ export function signUp(accountType,firstname,lastname,email,password,confirmPass
                 password,
                 confirmPassword,
                 otp,
+                navigate
             })
             console.log("SIGNUP API RESPONSE.........",response)
             if(!response.data.success){
