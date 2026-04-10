@@ -90,7 +90,7 @@ const Navbar = () => {
         <nav
           className={`${mobileMenuOpen ? "block" : "hidden"} md:block`}
           onMouseEnter={handleMouseEnter}
-          onMouseLeave={handleMouseLeave}
+          // onMouseLeave={handleMouseLeave}
         >
           <ul className="flex flex-col md:flex-row items-center text-center gap-6 mt-4 md:mt-0">
             {NavbarLinks.map(({ title, path }, index) => (

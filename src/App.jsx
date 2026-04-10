@@ -9,6 +9,8 @@ import Signup from './Pages/Signup'
 import Login from './Pages/Login'
 import VerifyEmail from './Pages/VerifyEmail'
 import Navbar from './Components/Common/Navbar'
+import Catalog from './Pages/Catalog'
+import CourseDetails from './Pages/CourseDetails'
 function App() {
   
   return (
@@ -16,6 +18,8 @@ function App() {
       <Navbar />
       <Routes>
         <Route path="/" element={<Home />}></Route>
+        <Route path="catalog/:catalogName" element={<Catalog />}></Route>
+        <Route path="courses/:courseId" element={<CourseDetails />}></Route>
         <Route path="/about" element={<About />}></Route>
         <Route path="/contact" element={<Contact />}></Route>
         <Route path="/signup" element={<Signup />}></Route>
