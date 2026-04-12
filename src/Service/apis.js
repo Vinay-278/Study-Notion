@@ -9,6 +9,13 @@ export const endpoints ={
     RESETPASSWORD_API:BASE_URL+'/auth/reset-password',
 }
 
+//student endpoints
+export const studentEndpoints = {
+  COURSE_PAYMENT_API: BASE_URL + '/payment/capturePayment',
+  COURSE_VERIFY_API: BASE_URL + '/payment/verifyPayment',
+  SEND_PAYMENT_SUCCESS_EMAIL_APIBASE_URL : BASE_URL + '/payment/sendPaymentSuccessEmail',
+};
+
 //Categories api
 
 export const categories = {
