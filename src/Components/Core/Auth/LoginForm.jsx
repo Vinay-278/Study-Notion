@@ -4,7 +4,8 @@ import { Link, useNavigate } from "react-router"
 import { SiGmail } from "react-icons/si"
 import { FaLock } from "react-icons/fa"
 import { useState } from "react"
-// import {} from "../../../Service/operations/authAPI"
+import {login} from "../../../Service/operations/authAPI"
+
 
 const LoginForm = () => {
     const navigate = useNavigate();
@@ -23,12 +24,12 @@ const LoginForm = () => {
     }
     const handleOnSubmit =(e)=>{
         e.preventDefault();
-        dispatch(Login(email,password,navigate))
+        dispatch(login(email,password,navigate))
     }
 
   return (
     <form
-      onSubmit={handleOnChange}
+      onSubmit={handleOnSubmit}
       className="mt-6 flex w-full flex-col gap-y-4"
     >
       <label className="w-full" style={{ position: "relative" }}>
