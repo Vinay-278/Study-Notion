@@ -65,8 +65,8 @@ exports.signUp= async(req,res) =>{
     try{
             //data fetch from request ki body
     const {
-        firstName,
-        lastName,
+        firstname,
+        lastname,
         email,
         password,
         confirmPassword,
@@ -75,7 +75,8 @@ exports.signUp= async(req,res) =>{
         otp,
     } =req.body;
     //validate krlo
-    if(!firstName || !lastName || !email || !password || !confirmPassword || !otp){
+    if(!firstname || !lastname || !email || !password || !confirmPassword || !otp){
+      console.log(firstname, lastname, email, password, otp, accountType);
         return res.status(403).json({
             success:false,
             message:"All information are required",
@@ -123,14 +124,14 @@ exports.signUp= async(req,res) =>{
     })
 
     const user= await User.create({
-        firstName,
-        lastName,
+        firstname,
+        lastname,
         email,
         contactNumber,
         password:hashedPassword,
         accountType,
         additionalDetails:profileDetails._id,
-        image:`https://api.dicebear.com/5.x/initials/svg?seed=${firstName} ${lastName}`,
+        image:`https://api.dicebear.com/5.x/initials/svg?seed=${firstname} ${lastname}`,
 
     })
     //return res
