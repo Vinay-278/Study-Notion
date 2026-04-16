@@ -1,7 +1,8 @@
 import {studentEndpoints} from '../apis'
 import { apiConnector } from "../apiconnector";
 import { toast } from "react-hot-toast";
-import { setPaymentLoading, resetCart } from "../../Slice/cartSlice";
+import {resetCart } from "../../Slice/cartSlice";
+import {setPayementLoading} from '../../Slice/courseSlice'
 import rzpLogo from "../../assets/Logo/rzp_logo.png";
 
 const {
@@ -24,7 +25,7 @@ function loadScript(src) {
 }
 
 // Buy Token (Main Payment Function)
-export async function buyToken(
+export async function buyCourse(
   token,
   courses,
   userDetails,
@@ -69,12 +70,10 @@ export async function buyToken(
       name: "StudyNotion",
       description: "Thank you for purchasing the course",
       image: rzpLogo,
-
       prefill: {
         name: userDetails.firstName,
         email: userDetails.email,
       },
-
       handler: function (response) {
         // Send Email
         sendPaymentSuccessEmail(response, orderData.amount, token);
@@ -123,7 +122,7 @@ async function sendPaymentSuccessEmail(response, amount, token) {
 
 // Verify Payment
 async function verifyPayment(bodyData, token, navigate, dispatch) {
-  dispatch(setPaymentLoading(true));
+  dispatch(setPayementLoading(true));
 
   try {
     const response = await apiConnector("POST", COURSE_VERIFY_API, bodyData, {
@@ -142,5 +141,5 @@ async function verifyPayment(bodyData, token, navigate, dispatch) {
     toast.error("Could not verify payment");
   }
 
-  dispatch(setPaymentLoading(false));
+  dispatch(setPayementLoading(false));
 }

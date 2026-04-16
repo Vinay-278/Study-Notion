@@ -28,6 +28,8 @@ export function sendOtp(email,navigate){
                 throw new Error(response.data.message)
             }
             toast.success("OTP sent Successfully")
+            navigate("/verify-email");
+            dispatch(setLoading(false));
             return true;
         }
         catch(error){

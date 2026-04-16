@@ -80,7 +80,7 @@ const SignupForm = () => {
     //to be used after otp verification
     dispatch(setSignupData(signupData));
     //send otp to user for verification
-    dispatch(sendOtp(formData.email),navigate);
+    dispatch(sendOtp(formData.email, navigate));
 
     //reset
     setFormData({
@@ -274,7 +274,7 @@ const SignupForm = () => {
         <button
           type="submit"
           className="mt-6 rounded-[8px] bg-yellow-300 py-[8px] px-[12px] font-medium text-[]"
-          // onClick={handleOnSubmit}
+          onClick={handleOnSubmit}
         >
           Create Account
         </button>
