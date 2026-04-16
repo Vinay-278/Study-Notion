@@ -74,3 +74,45 @@ export function signUp(accountType,firstname,lastname,email,password,confirmPass
         toast.dismiss(toastId)
     }
 }
+
+export function login(email, password, naviagte){
+    return async (dispatch) =>{
+        const toastId = toast.loading("Loading...")
+        dispatch(setLoading(true));
+        try{
+            const response = await apiConnector("POST", LOGIN_API,{
+                email,
+                password,
+            });
+            console.log("Login api response .....", response)
+            if(!response.data.success){
+                throw new Error(response.data.message)
+            }
+            toast.success("login successful")
+            dispatch(setToken(response.data.token))
+            const userImage = response.data?.user?.image
+              ? response.data.user.image
+              : `https://api.dicebear.com/5.x/initials/svg?seed=${response.data.user.firstName} ${response.data.user.lastName}`;
+              localStorage.setItem("token", JSON.stringify(response.data.token))
+              localStorage.setItem("user",JSON.stringify(response.data.user))
+        }
+        catch(error){
+            console.log("Login api error ....", error)
+            toast.error("login failed")
+        }
+        dispatch(setLoading(false))
+        toast.dismiss(toastId)
+    } 
+}
+
+export function logout(navigate){
+    return (dispatch) =>{
+        dispatch(setToken(null))
+        dispatch(setUser(null))
+        dispatch(resetCart)
+        localStorage.removeItem("token")
+        localStorage.removeItem("user")
+        toast.success("logged out")
+        navigate("/")
+    }
+}
