@@ -35,7 +35,7 @@ exports.capturePayement = async (req, res) => {
   }
 
   let totalAmount = 0;
-
+  {console.log(course)}
   // loop through each course
   for (const course_id of course) {
     let courses;
@@ -44,9 +44,9 @@ exports.capturePayement = async (req, res) => {
       courses = await Course.findById(course_id);
 
       if (!courses) {
-        return res.status(200).json({
+        return res.status(400).json({
           success: false,
-          message: "Could not find the course",
+          message: course,
         });
       }
 
