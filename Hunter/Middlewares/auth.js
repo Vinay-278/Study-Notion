@@ -10,7 +10,8 @@ const User= require("../Models/User");
 exports.auth= async (req, res, next) =>{
     try{
         //extract token from cookies, request body, or authoriztion header
-        const token = req.cookies.token || req.body.token || req.header("Authorisation");
+        const token =
+          req.cookies.token || req.body.token || req.header("Authorization");
         //if token missing,then return unauthorized
         if(!token){
             return res.status(401).json({
@@ -23,15 +24,16 @@ exports.auth= async (req, res, next) =>{
             //decode token using JWT_SECRET
             const decode = jwt.verify(token,process.env.JWT_SECRET);
             // for debugging: prints decoded payload
-            console.log(decode);
+            {console.log(decode);}
             //Attach decoded user info to request object
             req.user = decode;
         }
         catch(err){
             //If token is invalid or expired
+            {console.log(token)}
             return res.status(401).json({
                 success:false,
-                message:"token is invalid",
+                message:err.message,
             });
         }
         next();
@@ -50,7 +52,8 @@ exports.auth= async (req, res, next) =>{
 // This middleware ensures only Students can access the route
 exports.isStudent= async (req,res,next) =>{
     try{
-        if(req.user.accountType !=="Students"){
+        {console.log(req.user)}
+        if(req.user.accountType !=="Student"){
             return res.status(402).json({
                 success:false,
                 message:"This is protected route for Students only",

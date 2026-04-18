@@ -64,6 +64,7 @@ exports.capturePayement = async (req, res) => {
       // add course price to total
       totalAmount += courses.price;
     } catch (error) {
+      console.log("HEADERS:", req.headers);
       console.log(error);
       return res.status(500).json({
         success: false,
@@ -203,7 +204,7 @@ const enrollStudents = async (courses, userid, res) => {
         enrolledStudent.email,
         `Successfully Enrolled`,
         courseEnrollmentEmail(
-          enrolledStudent.firstName,
+          enrolledStudent.firstname,
           enrolledCourse.courseName,
         ),
       );
@@ -239,7 +240,7 @@ exports.sendPayementSuccessEmail = async (req, res) => {
       enrolledStudent.email,
       `Payement Recieved`,
       payementSuccessEmail(
-        enrolledStudent.firstName,
+        enrolledStudent.firstname,
         amount / 100,
         orderId,
         payementId,

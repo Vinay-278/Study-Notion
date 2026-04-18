@@ -11,8 +11,9 @@ const Catalog = () => {
         const {courseId} = useParams();
         const handleBuyCourse = () =>{
         console.log("clicked")
-        console.log(token)
+        //console.log(token)
         if(token){
+            {console.log(token)}
             buyCourse(token, [courseId], user, navigate, dispatch);
             return;
         }

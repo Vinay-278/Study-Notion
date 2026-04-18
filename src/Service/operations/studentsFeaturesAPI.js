@@ -49,12 +49,12 @@ export async function buyCourse(
     const orderResponse = await apiConnector(
       "POST",
       COURSE_PAYMENT_API,
-      { courses },
+      { course: courses },
       {
-        Authorization: `Bearer ${token}`,
+        Authorization: token.replace(/^"|"$/g, ""),
       },
     );
-
+    {console.log(orderResponse)}
     if (!orderResponse.data.success) {
       throw new Error(orderResponse.data.message);
     }
@@ -112,7 +112,7 @@ async function sendPaymentSuccessEmail(response, amount, token) {
         amount,
       },
       {
-        Authorization: `Bearer ${token}`,
+        Authorization: token,
       },
     );
   } catch (error) {
@@ -126,7 +126,7 @@ async function verifyPayment(bodyData, token, navigate, dispatch) {
 
   try {
     const response = await apiConnector("POST", COURSE_VERIFY_API, bodyData, {
-      Authorization: `Bearer ${token}`,
+      Authorization: token.replace(/^"|"$/g, ""),
     });
 
     if (!response.data.success) {
@@ -136,6 +136,7 @@ async function verifyPayment(bodyData, token, navigate, dispatch) {
     toast.success("Payment successful, you are enrolled!");
     navigate("/dashboard/enrolled-courses");
     dispatch(resetCart());
+    {console.log(token)}
   } catch (error) {
     console.log("Payment verify error...", error);
     toast.error("Could not verify payment");

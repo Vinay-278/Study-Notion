@@ -92,8 +92,8 @@ export function login(email, password, naviagte){
             dispatch(setToken(response.data.token))
             const userImage = response.data?.user?.image
               ? response.data.user.image
-              : `https://api.dicebear.com/5.x/initials/svg?seed=${response.data.user.firstName} ${response.data.user.lastName}`;
-              localStorage.setItem("token", JSON.stringify(response.data.token))
+              : `https://api.dicebear.com/5.x/initials/svg?seed=${response.data.user.firstname} ${response.data.user.lastname}`;
+              localStorage.setItem("token", response.data.token)
               localStorage.setItem("user",JSON.stringify(response.data.user))
         }
         catch(error){

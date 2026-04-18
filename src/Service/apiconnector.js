@@ -9,7 +9,9 @@ export const apiConnector =(method, url, bodyData, headers, params) =>{
       method: `${method}`, // get,post,put,delete
       url: `${url}`, //batata hai request kahan bejna hai
       data: bodyData ? bodyData : null, // POST/PUT ke liye request body
-      headers: headers ? headers : null, // auth ,token wagaira
+      headers:  {
+      ...headers,  
+    }, // auth ,token wagaira
       params: params ? params : null, //URL ke query parameters
     });
 }
